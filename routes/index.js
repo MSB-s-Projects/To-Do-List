@@ -12,16 +12,16 @@ var router = express.Router();
 router.use(bodyParser.urlencoded({extended: true}));
 
 // creating global variables to use in ejs
-const items = ["Buy Food", "Cook Food", "Eat Food"];
+const listItems = ["Buy Food", "Cook Food", "Eat Food"];
 const workItems = [];
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get("/", (req, res) => {
   // getting today's date
   const day = date.getDate();
 
   // rendering index.ejs
-  res.render('list', {listTitle: day, newListItems: items});
+  res.render("index", { pageTitle: day, listItems: listItems });
 });
 
 // post function for "/" route
