@@ -7,6 +7,10 @@ const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const _ = require("lodash");
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 // creating a router
 var router = express.Router();
 
@@ -14,7 +18,9 @@ var router = express.Router();
 router.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://127.0.0.1:27017/todoListDB");
+mongoose.connect(
+  `mongodb+srv://${process.env.mongoUsername}:${process.env.mongoPass}@cluster0.7xjfwjc.mongodb.net/todoListDB`
+);
 
 const itemsSchema = new mongoose.Schema({
   name: String,
