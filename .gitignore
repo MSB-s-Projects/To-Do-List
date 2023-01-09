@@ -1,2 +1,14 @@
+
+# Excluding vscode files
+.vscode
+
+# Ignoring the node module files
 **/node_modules
+package-lock.json
+
+# Ignoring environment variables
 .env
+
+
+# Miscellaneous ignores
+fonsts.txt

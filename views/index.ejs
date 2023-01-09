@@ -1,24 +1,29 @@
+<!-- Include header partial -->
 <%- include("header") %> 
 
     <div class="box" id="heading">
         <h1><%= pageTitle %></h1>
     </div>
     <div class="box">
+        <!-- Crating a form for deleting items in list -->
         <form action="/delete" method="post">
+            <!-- adding list item form the item list -->
             <%  listItems.forEach((item) => { %>
                 <div class="item">
                     <input type="checkbox" value="<%=item._id%>" name="checkbox">
                     <p> <%= item.name %> </p>
                 </div>
-                <% }) %> 
-                <div class="algn">
-                <button class="clear" type="submit" name= "list" value="<%= listName %>">clear</button>
-                </div>
+            <% }) %>
+            <!-- Submit Button for the form -->
+            <button class="clear" type="submit" name= "list" value="<%= listName %>">clear</button>
         </form>
-    <form class="item" action="/" method="post">
-        <input type="text" name="newItem" autocomplete="off" placeholder="New Item">
-        <button class="btn" type="submit" name="listName" value="<%= listName %>">+</button>
-    </form>
+    
+        <!-- form for adding items in list -->
+        <form class="item" action="/" method="post">
+            <input type="text" name="newItem" autocomplete="off" placeholder="New Item">
+            <button class="btn" type="submit" name="listName" value="<%= listName %>">+</button>
+        </form>
     </div>
 
+<!-- include footer partial -->
 <%- include("footer") %> 
