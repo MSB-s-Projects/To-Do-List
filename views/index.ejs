@@ -4,15 +4,21 @@
         <h1><%= pageTitle %></h1>
     </div>
     <div class="box">
-        <% for (let i=0; i<listItems.length; i++ ){  %>
-            <div class="item">
-                <input type="checkbox">
-                <p><%= listItems[i] %> </>
-            </div>
-        <% };  %>
+        <form action="/delete" method="post">
+            <%  listItems.forEach((item) => { %>
+                <div class="item">
+                    <input type="checkbox" value="<%=item._id%>" name="checkbox">
+                    <p> <%= item.name %> </p>
+                </div>
+                <% }) %> 
+                <input type="hidden" name="listName" val="<%= listName %>">
+                <div class="algn">
+                <button class="clear" type="submit">clear</button>
+                </div>
+        </form>
     <form class="item" action="/" method="post">
         <input type="text" name="newItem" autocomplete="off" placeholder="New Item">
-        <button type="submit" name="btn" value="<%= pageTitle %>">+</button>
+        <button class="btn" type="submit" name="listName" value="<%= listName %>">+</button>
     </form>
     </div>
 
