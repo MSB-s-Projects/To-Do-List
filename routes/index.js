@@ -16,7 +16,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.set("strictQuery", true);
 mongoose.connect(
-  `mongodb+srv://admin-MSB:admin-MSB@cluster0.7xjfwjc.mongodb.net/todoListDB`
+  `mongodb+srv://${process.env.mongoUsername}:${process.env.mongoPass}@cluster0.7xjfwjc.mongodb.net/todoListDB`
 );
 
 const itemsSchema = new mongoose.Schema({
