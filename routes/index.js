@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 // importing local module for date
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 // creating a router
 var router = express.Router();
@@ -93,11 +94,10 @@ router.post("/delete", (req, res) => {
   } else {
     var checkedItemIds = req.body.checkbox;
   }
-  console.log(checkedItemIds);
 
-  const listName = req.body.listName;
+  const listName = req.body.list;
 
-  if(listName === "@index") {
+  if (listName === "@index") {
     Item.deleteMany(
       {
         _id: {
@@ -110,13 +110,20 @@ router.post("/delete", (req, res) => {
       }
     );
   } else {
-    
+    List.findOneAndUpdate(
+      { name: listName },
+      { $pull: { items: { _id: { $in: checkedItemIds } } } },
+      (err, result) => {
+        if (!err) {
+          res.redirect(`/${listName}`);
+        }
+      }
+    );
   }
-
 });
 
 router.get("/:customListName", (req, res) => {
-  const customListName = req.params.customListName;
+  const customListName = _.capitalize(req.params.customListName);
 
   List.findOne({ name: customListName }, (err, foundList) => {
     if (!err) {
